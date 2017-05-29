@@ -3,7 +3,7 @@
 Simple example of using _Echo_ entity component system framework in collaboration with _Luxe_ game engine, _Nape_ physics engine
 Based on [_some old test luxe project_](https://github.com/wimcake/ChickensFlightLuxeDemo)
 
-[_Live_](https://wimcake.github.io/echo/web/)
+[_Live_](https://wimcake.github.io/chickens/bin/web/)
 
 Used libs:
  * [_Nape_](https://github.com/deltaluca/nape)
