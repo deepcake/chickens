@@ -1,0 +1,59 @@
+{
+
+	luxe: {
+		window: {
+			width: 1280,
+			height: 720,
+			//resizable: false,
+			title: 'chickens'
+		}
+	},
+
+	project: {
+		name: 'chickens',
+		version: '0.1.0',
+		author: 'wimcake',
+
+		app: {
+			name: 'chickens',
+			package: 'com.wimcake.chickens',
+			main: 'Main',
+
+			output: 'bin/',
+
+			codepaths: [
+				'src'
+			],
+
+			mobile: {
+				android: {
+					install_location: 'auto'
+				}
+			}
+		},
+
+		build: {
+			flags: ['-dce full'],
+			defines: ['analyzer-optimize'],
+			dependencies: {
+				luxe: '*',
+				nape: '*',
+				echo: '*'
+			}
+		},
+
+		files: {
+			config: 'config.json',
+		}
+	},
+
+	if: {
+		"web": {
+			files: {
+				assets: 'assets => assets',
+				index : { path: 'index_template.html => index.html', template: 'project', not_listed: true }
+			}
+		}
+	}
+
+}

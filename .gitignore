@@ -1,0 +1,13 @@
+*.hxproj
+/.vscode
+*.map
+completion.hxml
+
+/bin/*
+!/bin/web/
+/bin/web/*
+!/bin/web/assets/
+!/bin/web/*.js
+!/bin/web/*.json
+!/bin/web/*.html
+!/bin/web/*.png
