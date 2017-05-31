@@ -48,7 +48,7 @@ class Game extends State {
 		Builder.echo.addSystem(new Nape(Luxe.physics.nape.space));
 		Builder.echo.addSystem(new Gameplay(Luxe.physics.nape.space));
 		Builder.echo.addSystem(new Render());
-		Builder.echo.addSystem(new NapeImmediateDrawer());
+		//Builder.echo.addSystem(new NapeImmediateDrawer());
 		Builder.echo.addSystem(new Destroyer());
 
 		Luxe.on(Ev.update, Builder.echo.update);
@@ -103,7 +103,7 @@ class Game extends State {
 	}
 
 	override function update(dt:Float) {
-		Log.track('echo', Builder.echo.stats());
+		Log.track('echo', '${Builder.echo}');
 	}
 
 }

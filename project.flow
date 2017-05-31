@@ -34,7 +34,7 @@
 
 		build: {
 			flags: ['-dce full'],
-			defines: ['analyzer-optimize'],
+			defines: ['analyzer-optimize', 'echo_debug'],
 			dependencies: {
 				luxe: '*',
 				nape: '*',
