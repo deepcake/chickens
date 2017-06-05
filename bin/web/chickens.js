@@ -2194,7 +2194,8 @@ Xml.prototype = {
 	,__class__: Xml
 };
 var echo_Echo = function() {
-	this.updateStats = new haxe_ds_ObjectMap();
+	this.timestamp = new Date().getTime() / 1000;
+	this.updateStats = new haxe_ds_IntMap();
 	this.systems = new List();
 	this.views = new List();
 	this.entities = new List();
@@ -2207,30 +2208,41 @@ echo_Echo.__name__ = ["echo","Echo"];
 echo_Echo.prototype = {
 	toString: function() {
 		var ret = "Echo" + (" ( " + this.systems.length + " )") + (" { " + this.views.length + " }") + (" [ " + this.entities.length + " ]");
+		ret += "\n  since last update : " + this.updateStats.h[-10] + " ms";
+		ret += "\n  echo total update : " + this.updateStats.h[-100] + " ms";
 		var _g_head = this.systems.h;
 		while(_g_head != null) {
 			var val = _g_head.item;
 			_g_head = _g_head.next;
-			ret += "\n\t( " + Type.getClassName(val == null ? null : js_Boot.getClass(val)) + " ) : " + this.updateStats.h[val.__id__] + " ms";
+			ret += "\n    ( " + Type.getClassName(val == null ? null : js_Boot.getClass(val)) + " ) : " + this.updateStats.h[val.__id] + " ms";
 		}
 		var _g_head1 = this.views.h;
 		while(_g_head1 != null) {
 			var val1 = _g_head1.item;
 			_g_head1 = _g_head1.next;
-			ret += "\n\t{ " + Type.getClassName(val1 == null ? null : js_Boot.getClass(val1)) + (" } [ " + val1.entities.length + " ]");
+			ret += "\n  { " + Type.getClassName(val1 == null ? null : js_Boot.getClass(val1)) + (" } [ " + val1.entities.length + " ]");
 		}
 		return ret;
 	}
 	,update: function(dt) {
+		var this1 = this.updateStats;
+		var value = (new Date().getTime() / 1000 - this.timestamp) * 1000 | 0;
+		this1.h[-10] = value;
+		var updateTimestamp = new Date().getTime() / 1000;
 		var _g_head = this.systems.h;
 		while(_g_head != null) {
 			var val = _g_head.item;
 			_g_head = _g_head.next;
 			var s = val;
-			var stamp = new Date().getTime() / 1000;
+			this.timestamp = new Date().getTime() / 1000;
 			s.update(dt);
-			this.updateStats.set(s,(new Date().getTime() / 1000 - stamp) * 1000 | 0);
+			var this2 = this.updateStats;
+			var key = s.__id;
+			var value1 = (new Date().getTime() / 1000 - this.timestamp) * 1000 | 0;
+			this2.h[key] = value1;
 		}
+		this.timestamp = new Date().getTime() / 1000;
+		this.updateStats.h[-100] = (this.timestamp - updateTimestamp) * 1000 | 0;
 	}
 	,addSystem: function(s) {
 		if(!this.systemsMap.h.hasOwnProperty(s.__id)) {
