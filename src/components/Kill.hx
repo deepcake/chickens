@@ -1,4 +1,4 @@
-package echo.components;
+package components;
 
 /**
  * ...

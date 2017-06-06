@@ -1,6 +1,6 @@
-package echo.systems;
+package systems;
 
-import echo.components.Kill;
+import components.Kill;
 import echo.System;
 import echo.View;
 

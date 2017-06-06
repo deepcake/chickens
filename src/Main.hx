@@ -20,9 +20,9 @@ class Main extends luxe.Game {
 
 	static public var states:States;
 
-	var toptext:Text;
-	var bottext:Text;
-	var rbottext:Text;
+	var mon_text:Text;
+	var log_text:Text;
+	var info_text:Text;
 
 
 	override public function config(config:GameConfig):GameConfig { // TODO move to config.json ?
@@ -45,11 +45,8 @@ class Main extends luxe.Game {
 		var logbat = Luxe.renderer.create_batcher( { name: 'log' } );
 		var size = 14 * Luxe.screen.device_pixel_ratio;
 
-		toptext = new luxe.LogText(true, true, size, new Color().rgb(Std.random(0xffffff)), logbat);
-		bottext = new luxe.LogText(true, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
-
-		rbottext = new luxe.LogText(false, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
-		rbottext.text = '[R] to reload scene; [Q/A] to add/remove chicken; [D] to enable/disable debug nape draw';
+		mon_text = new luxe.LogText(true, true, size, new Color().rgb(Std.random(0xffffff)), logbat);
+		log_text = new luxe.LogText(false, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
 
 		Log.log('ready');
 
@@ -69,6 +66,8 @@ class Main extends luxe.Game {
 
 
 	function start() {
+		Builder.initialize();
+
 		states = new States( { name: "states" } );
 		states.add(new Game());
 
@@ -80,8 +79,8 @@ class Main extends luxe.Game {
 		Log.track('dt', dt.fpretty(3));
 		Log.track('render', '${Luxe.renderer.stats}');
 
-		toptext.text = Log.getTracks();
-		bottext.text = Log.getLogs(25);
+		mon_text.text = Log.getTracks();
+		log_text.text = Log.getLogs(50);
 	}
 
 	override function onwindowsized(e:WindowEvent) {

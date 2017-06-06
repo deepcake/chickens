@@ -11,8 +11,8 @@ import luxe.States.State;
 import luxe.Vector;
 import luxe.tween.Actuate;
 import luxe.Ev;
-import echo.systems.*;
-import luxe.systems.*;
+import luxe.Text;
+import systems.*;
 
 using Log;
 using Lambda;
@@ -24,8 +24,10 @@ using Lambda;
 class Game extends State {
 
 
-	var CHICKENS_COUNT = 100;
-	var MONSTERS_COUNT = 20;
+	var CHICKENS_COUNT = 64;
+	var MONSTERS_COUNT = 16;
+
+	var info_text:Text;
 
 
 	public function new() super( { name: 'game' } );
@@ -39,9 +41,18 @@ class Game extends State {
 		for (i in 0...CHICKENS_COUNT) Builder.chicken(range(0, Luxe.screen.width * .25), grange(Luxe.screen.height * .2, Luxe.screen.height * .8), range(50, 70), 0);
 	}
 
+	function add_chicken(count:Int) {
+		for (i in 0...count) Builder.chicken(range(0, Luxe.screen.width * .25), grange(Luxe.screen.height * .2, Luxe.screen.height * .8), range(50, 70), 0);
+	}
 
-	override public function init() {
-		Builder.initialize();
+	function remove_chicken(count:Int) {
+		for (i in 0...count) if (Builder.echo.entities.last() != null) Builder.echo.remove(Builder.echo.entities.first());
+	}
+
+	override function init() {
+		var size = 14 * Luxe.screen.device_pixel_ratio;
+		info_text = new luxe.LogText(true, false, size, new Color().rgb(Std.random(0xffffff)));
+		info_text.text = '[R] to reload scene\n[Q/A][right/left tap] to add/remove chicken\n[D] to enable/disable debug nape draw';
 	}
 
 	override public function onenter(_) {
@@ -51,23 +62,27 @@ class Game extends State {
 		//Builder.echo.addSystem(new NapeImmediateDrawer());
 		Builder.echo.addSystem(new Destroyer());
 
-		Luxe.on(Ev.update, Builder.echo.update);
 		build();
+
+		if (info_text.scene == null) Luxe.scene.add(info_text);
 	}
 
 	override public function onleave(_) {
-		Luxe.off(Ev.update, Builder.echo.update);
 		Builder.echo.systems.iter(function(s) Builder.echo.removeSystem(s));
 		Builder.echo.views.iter(function(v) Builder.echo.removeView(v));
 		Builder.echo.entities.iter(function(i) Builder.echo.remove(i));
+
+		info_text.scene.remove(info_text);
 	}
 
 	override public function ontouchdown(e:TouchEvent) {
 		Log.log('touch x: ' + e.x + ', y: ' + e.y);
+		if (e.x > .5) add_chicken(8); else remove_chicken(8);
 	}
 
 	override public function onmousedown(e:MouseEvent) {
 		Log.log('click x: ' + e.x + ', y: ' + e.y);
+		if (e.x > Luxe.screen.mid.x) add_chicken(8); else remove_chicken(8);
 	}
 
 	override public function onmouseup(e:MouseEvent) {
@@ -86,10 +101,10 @@ class Game extends State {
 				build();
 
 			case Key.key_q:
-				for (i in 0...10) Builder.chicken(range(0, Luxe.screen.width * .25), grange(Luxe.screen.height * .2, Luxe.screen.height * .8), range(50, 70), 0);
+				add_chicken(8);
 
 			case Key.key_a:
-				for (i in 0...10) if (Builder.echo.entities.last() != null) Builder.echo.remove(Builder.echo.entities.first());
+				remove_chicken(8);
 
 			case Key.key_d:
 				if (Builder.echo.hasSystem(NapeImmediateDrawer)) Builder.echo.removeSystem(Builder.echo.getSystem(NapeImmediateDrawer));

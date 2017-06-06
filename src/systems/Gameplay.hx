@@ -1,8 +1,8 @@
-package echo.systems;
+package systems;
 
 import echo.View;
 import echo.System;
-import echo.components.Vel;
+import components.Vel;
 import nape.callbacks.CbEvent;
 import nape.callbacks.InteractionCallback;
 import nape.callbacks.InteractionListener;

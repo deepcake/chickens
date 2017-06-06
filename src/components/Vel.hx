@@ -1,4 +1,4 @@
-package echo.components;
+package components;
 
 @:forward(x, y)
 abstract Vel(nape.geom.Vec2) from nape.geom.Vec2 to nape.geom.Vec2 {

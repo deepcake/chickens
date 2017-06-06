@@ -1,4 +1,4 @@
-package luxe.systems;
+package systems;
 
 import echo.View;
 import echo.System;

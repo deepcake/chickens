@@ -1,12 +1,12 @@
 package;
-import luxe.components.sprite.SpriteAnimation;
+import luxe.Ev;
 import luxe.Sprite;
 import luxe.Vector;
 import phoenix.Texture.FilterType;
 import luxe.components.Animation;
 import spritesheet.SpriteSheet;
 import echo.Echo;
-import echo.components.*;
+import components.*;
 import nape.callbacks.CbType;
 import nape.dynamics.InteractionFilter;
 import nape.geom.Vec2;
@@ -43,6 +43,8 @@ class Builder {
 		SpriteSheet.parseSparrowXmlString(Luxe.resources.text('assets/sprites.xml').asset.text, atlas);
 
 		echo = new Echo();
+
+		Luxe.on(Ev.update, echo.update);
 	}
 
 
