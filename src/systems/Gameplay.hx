@@ -2,7 +2,6 @@ package systems;
 
 import echo.View;
 import echo.System;
-import components.Vel;
 import nape.callbacks.CbEvent;
 import nape.callbacks.InteractionCallback;
 import nape.callbacks.InteractionListener;
@@ -10,7 +9,7 @@ import nape.callbacks.InteractionType;
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.space.Space;
-import luxe.Color;
+import components.*;
 
 /**
  * ...
@@ -19,7 +18,7 @@ import luxe.Color;
 class Gameplay extends System {
 
 
-	var view:View<{ b:Body, vel:Vel }>;
+	var view:View<{ b:Body, vel:Vel, s:Status }>;
 	var space:Space;
 
 
@@ -35,15 +34,17 @@ class Gameplay extends System {
 	function startInteract(cb:InteractionCallback) {
 		var i1:Int = cb.int1.userData.id;
 		var i2:Int = cb.int2.userData.id;
-		if (echo.hasComponent(i1, Color)) echo.getComponent(i1, Color).rgb(0xf00000);
-		if (echo.hasComponent(i2, Color)) echo.getComponent(i2, Color).rgb(0xf00000);
+
+		if (echo.hasComponent(i1, Status)) echo.getComponent(i1, Status).interactingBodies.push(i2);
+		if (echo.hasComponent(i2, Status)) echo.getComponent(i2, Status).interactingBodies.push(i1);
 	}
 
 	function stopInteract(cb:InteractionCallback) {
 		var i1:Int = cb.int1.userData.id;
 		var i2:Int = cb.int2.userData.id;
-		if (echo.hasComponent(i1, Color)) echo.getComponent(i1, Color).rgb(0xf0f0f0);
-		if (echo.hasComponent(i2, Color)) echo.getComponent(i2, Color).rgb(0xf0f0f0);
+
+		if (echo.hasComponent(i1, Status)) echo.getComponent(i1, Status).interactingBodies.remove(i2);
+		if (echo.hasComponent(i2, Status)) echo.getComponent(i2, Status).interactingBodies.remove(i1);
 	}
 
 	override public function update(dt:Float) {

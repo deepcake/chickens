@@ -17,7 +17,7 @@
 		app: {
 			name: 'chickens',
 			package: 'com.wimcake.chickens',
-			main: 'Main',
+			main: 'MainLuxe',
 
 			output: 'bin/',
 

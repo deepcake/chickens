@@ -1,4 +1,4 @@
-package luxe;
+package luxe.utils;
 
 import luxe.Color;
 import luxe.Text;

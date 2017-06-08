@@ -8,7 +8,7 @@ import echo.View;
  * ...
  * @author https://github.com/wimcake
  */
-class Destroyer extends System {
+class Destroy extends System {
 
 	var view:View<{ d:Kill }>;
 

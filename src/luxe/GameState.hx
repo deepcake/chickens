@@ -1,4 +1,4 @@
-package;
+package luxe;
 
 import luxe.Color;
 import luxe.Input.Key;
@@ -21,7 +21,7 @@ using Lambda;
  * ...
  * @author https://github.com/wimcake
  */
-class Game extends State {
+class GameState extends State {
 
 
 	var CHICKENS_COUNT = 64;
@@ -46,12 +46,12 @@ class Game extends State {
 	}
 
 	function remove_chicken(count:Int) {
-		for (i in 0...count) if (Builder.echo.entities.last() != null) Builder.echo.remove(Builder.echo.entities.first());
+		for (i in 0...count) if (Builder.echo.entities.last() != null) Builder.echo.remove(Builder.echo.entities.last());
 	}
 
 	override function init() {
 		var size = 14 * Luxe.screen.device_pixel_ratio;
-		info_text = new luxe.LogText(true, false, size, new Color().rgb(Std.random(0xffffff)));
+		info_text = new luxe.utils.LogText(true, false, size, new Color().rgb(Std.random(0xffffff)));
 		info_text.text = '[R] to reload scene\n[Q/A][right/left tap] to add/remove chicken\n[D] to enable/disable debug nape draw';
 	}
 
@@ -59,8 +59,8 @@ class Game extends State {
 		Builder.echo.addSystem(new Nape(Luxe.physics.nape.space));
 		Builder.echo.addSystem(new Gameplay(Luxe.physics.nape.space));
 		Builder.echo.addSystem(new Render());
-		//Builder.echo.addSystem(new NapeImmediateDrawer());
-		Builder.echo.addSystem(new Destroyer());
+		//Builder.echo.addSystem(new NapeDebugDraw());
+		Builder.echo.addSystem(new Destroy());
 
 		build();
 
@@ -107,8 +107,8 @@ class Game extends State {
 				remove_chicken(8);
 
 			case Key.key_d:
-				if (Builder.echo.hasSystem(NapeImmediateDrawer)) Builder.echo.removeSystem(Builder.echo.getSystem(NapeImmediateDrawer));
-				else Builder.echo.addSystem(new NapeImmediateDrawer());
+				if (Builder.echo.hasSystem(NapeDebugDraw)) Builder.echo.removeSystem(Builder.echo.getSystem(NapeDebugDraw));
+				else Builder.echo.addSystem(new NapeDebugDraw());
 
 			case Key.escape: 
 				Luxe.shutdown();

@@ -15,7 +15,7 @@ import luxe.Vector;
 
 using Log;
 
-class Main extends luxe.Game {
+class MainLuxe extends luxe.Game {
 
 
 	static public var states:States;
@@ -45,8 +45,8 @@ class Main extends luxe.Game {
 		var logbat = Luxe.renderer.create_batcher( { name: 'log' } );
 		var size = 14 * Luxe.screen.device_pixel_ratio;
 
-		mon_text = new luxe.LogText(true, true, size, new Color().rgb(Std.random(0xffffff)), logbat);
-		log_text = new luxe.LogText(false, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
+		mon_text = new luxe.utils.LogText(true, true, size, new Color().rgb(Std.random(0xffffff)), logbat);
+		log_text = new luxe.utils.LogText(false, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
 
 		Log.log('ready');
 
@@ -69,7 +69,7 @@ class Main extends luxe.Game {
 		Builder.initialize();
 
 		states = new States( { name: "states" } );
-		states.add(new Game());
+		states.add(new luxe.GameState());
 
 		states.set("game");
 	}

@@ -15,7 +15,7 @@ class Render extends System {
 	var view:View<{ b:Body, s:Sprite }>;
 
 
-	@r function removeSprite(id:Int) {
+	@r function remove_sprite(id:Int) {
 		echo.getComponent(id, Sprite).destroy();
 	}
 
@@ -23,11 +23,12 @@ class Render extends System {
 		for (v in view) {
 
 			if (v.s.flipx && v.b.velocity.x > 0) v.s.flipx = false;
-			if (!v.s.flipx && v.b.velocity.x < 0) v.s.flipx = true;
+			else if (!v.s.flipx && v.b.velocity.x < 0) v.s.flipx = true;
 
 			v.s.pos.x = v.b.position.x;
 			v.s.pos.y = v.b.position.y;
-			v.s.depth = Std.int(v.b.position.y);
+
+			if (Std.int(v.b.position.y) != Std.int(v.s.depth)) v.s.depth = v.b.position.y;
 
 		}
 	}

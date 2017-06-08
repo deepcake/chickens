@@ -1,4 +1,4 @@
-package luxe;
+package luxe.utils;
 import luxe.Color;
 import luxe.Vector;
 import luxe.tween.Actuate;
@@ -14,7 +14,7 @@ import phoenix.geometry.Geometry;
  * ...
  * @author https://github.com/wimcake
  */
-class NapeDraw {
+class NapeDrawer {
 
 
 	static public function cir(c:Circle, color:Color, solid:Bool = false, ?batch:Batcher, imm:Bool = false, local:Bool = true):Geometry {
@@ -63,12 +63,6 @@ class NapeDraw {
 			color: color,
 			immediate: imm
 		} );
-	}
-
-
-	static public function temp(g:Geometry, delay:Float = 5.0, dur:Float = 1.0):Geometry {
-		Actuate.tween(g.color, dur, { a: .0 } ).delay(delay).onComplete(g.drop);
-		return g;
 	}
 
 
