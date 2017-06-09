@@ -6,11 +6,7 @@ import luxe.Input.KeyEvent;
 import luxe.Input.MouseButton;
 import luxe.Input.MouseEvent;
 import luxe.Input.TouchEvent;
-import luxe.Sprite;
 import luxe.States.State;
-import luxe.Vector;
-import luxe.tween.Actuate;
-import luxe.Ev;
 import luxe.Text;
 import systems.*;
 

@@ -2,16 +2,12 @@ package;
 
 import luxe.loading.ArcProgress;
 import luxe.Color;
-import luxe.Entity;
-import luxe.Ev;
 import luxe.GameConfig;
-import luxe.Input;
 import luxe.Parcel;
 import luxe.Rectangle;
 import luxe.Screen.WindowEvent;
 import luxe.States;
 import luxe.Text;
-import luxe.Vector;
 
 using Log;
 
