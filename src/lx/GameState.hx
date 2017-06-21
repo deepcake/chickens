@@ -21,24 +21,29 @@ class GameState extends State {
 
 
 	var CHICKENS_COUNT = 64;
-	var MONSTERS_COUNT = 16;
+	var MONSTERS_COUNT = 8;
 
 	var info_text:Text;
 
 
 	public function new() super( { name: 'game' } );
 
-
-	inline function range(start:Float, end:Float) return start + (end - start) * Math.random();
-	inline function grange(start:Float, end:Float, count:Int = 3) return [ for (i in 0...count) range(start, end) ].fold(function(sum, el) return sum + el, .0) / count;
+	// uniform
+	inline function urange(start:Float, end:Float) return start + (end - start) * Math.random();
+	// normal
+	inline function nrange(start:Float, end:Float, power:Int = 3) return [ for (i in 0...power) urange(start, end) ].fold(function(sum, el) return sum + el, .0) / power;
 
 	function build() {
-		for (i in 0...MONSTERS_COUNT) Builder.monster(range(Luxe.screen.width, Luxe.screen.width * .75), grange(Luxe.screen.height * .2, Luxe.screen.height * .8), -range(40, 60), 0);
-		for (i in 0...CHICKENS_COUNT) Builder.chicken(range(0, Luxe.screen.width * .25), grange(Luxe.screen.height * .2, Luxe.screen.height * .8), range(50, 70), 0);
+		add_monster(MONSTERS_COUNT);
+		add_chicken(CHICKENS_COUNT);
+	}
+
+	function add_monster(count:Int) {
+		for (i in 0...count) Builder.monster(nrange(0, Luxe.screen.width), nrange(0, Luxe.screen.height), urange(40, 60), 0);
 	}
 
 	function add_chicken(count:Int) {
-		for (i in 0...count) Builder.chicken(range(0, Luxe.screen.width * .25), grange(Luxe.screen.height * .2, Luxe.screen.height * .8), range(50, 70), 0);
+		for (i in 0...count) Builder.chicken(nrange(0, Luxe.screen.width), nrange(0, Luxe.screen.height), urange(70, 150), 0);
 	}
 
 	function remove_chicken(count:Int) {

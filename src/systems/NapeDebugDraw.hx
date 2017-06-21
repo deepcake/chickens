@@ -12,7 +12,6 @@ import components.Status;
 class NapeDebugDraw extends System {
 
 
-	var view:View<{ b:Body }>;
 	var solidNonsensors:Bool;
 
 	#if luxe var batcher:phoenix.Batcher; #end
@@ -26,16 +25,14 @@ class NapeDebugDraw extends System {
 		#end
 	}
 
-	override public function update(dt:Float) {
-		for (v in view) {
-			for (sh in v.b.shapes) {
-				#if luxe
-					var color = (echo.hasComponent(v.id, Status) && echo.getComponent(v.id, Status).interactingBodies.length > 0) ? new luxe.Color().rgb(0xf00000) : new luxe.Color().rgb(0xf0f0f0);
-					if (sh.isCircle()) lx.utils.NapeDrawer.cir(sh.castCircle, color, (solidNonsensors ? !sh.sensorEnabled : false), batcher, true, false);
-					else lx.utils.NapeDrawer.pol(sh.castPolygon, color, (solidNonsensors ? !sh.sensorEnabled : false), batcher, true, false);
-				#end
-			}
+	#if luxe
+	@u inline function draw_body(dt:Float, b:Body) {
+		var color = new luxe.Color().rgb(0xf0f0f0);
+		for (sh in b.shapes) {
+			if (sh.isCircle()) lx.utils.NapeDrawer.cir(sh.castCircle, color, (solidNonsensors ? !sh.sensorEnabled : false), batcher, true, false);
+			else lx.utils.NapeDrawer.pol(sh.castPolygon, color, (solidNonsensors ? !sh.sensorEnabled : false), batcher, true, false);
 		}
 	}
+	#end
 
 }
