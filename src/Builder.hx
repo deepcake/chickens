@@ -103,7 +103,11 @@ class LuxeBuilder {
 #end
 
 class NapeBuilder {
-	public function new() { }
+	public var space:nape.space.Space;
+
+	public function new() {
+		space = new nape.space.Space();
+	}
 
 	public function box(w:Float, h:Float, sensor:Bool = false, ?mat:Material):Shape {
 		var sh = new Polygon(Polygon.box(w, h, true), mat != null ? mat : Material.wood());

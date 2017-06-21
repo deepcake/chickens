@@ -18,11 +18,15 @@ class Nape extends System {
 	var view:View<{ b:Body }>;
 
 
-	public function new(?space:Space) {
-		this.space = space == null ? new Space() : space;
+	public function new(space:Space) {
+		this.space = space;
 		space.gravity.setxy(.0, .0);
 		space.worldLinearDrag = 8;
 		space.worldAngularDrag = 32;
+	}
+
+	override function ondeactivate() {
+		space.clear();
 	}
 
 	@a inline function ad(id:Int, b:Body) {
@@ -36,7 +40,7 @@ class Nape extends System {
 	}
 
 	@u public function step(dt:Float) {
-		#if !luxe space.step(dt); #end
+		space.step(dt);
 		Log.track('bodies', space.bodies.length);
 	}
 

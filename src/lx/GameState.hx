@@ -52,8 +52,8 @@ class GameState extends State {
 	}
 
 	override public function onenter(_) {
-		Builder.echo.addSystem(new Nape(Luxe.physics.nape.space));
-		Builder.echo.addSystem(new Gameplay(Luxe.physics.nape.space));
+		Builder.echo.addSystem(new Nape(Builder.nape.space));
+		Builder.echo.addSystem(new Gameplay(Builder.nape.space, Luxe.screen.width, Luxe.screen.height));
 		Builder.echo.addSystem(new Render());
 		//Builder.echo.addSystem(new NapeDebugDraw());
 		Builder.echo.addSystem(new Destroy());

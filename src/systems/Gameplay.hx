@@ -20,9 +20,13 @@ class Gameplay extends System {
 
 	var view:View<{ b:Body, vel:Vel, s:Status }>;
 	var space:Space;
+	var w:Float;
+	var h:Float;
 
 
-	public function new(space:Space) {
+	public function new(space:Space, ?w:Float, ?h:Float) {
+		this.w = w;
+		this.h = h;
 		this.space = space;
 	}
 
@@ -51,8 +55,11 @@ class Gameplay extends System {
 		for (v in view) {
 			v.b.velocity.x = v.vel.x;
 			v.b.velocity.y = v.vel.y;
-			if (v.b.position.x > Luxe.screen.w) v.b.position.x -= Luxe.screen.w; else if (v.b.position.x < 0) v.b.position.x += Luxe.screen.w;
-			if (v.b.position.y > Luxe.screen.h) v.b.position.y -= Luxe.screen.h; else if (v.b.position.y < 0) v.b.position.y += Luxe.screen.h;
+
+			
+
+			if (v.b.position.x > w) v.b.position.x -= w; else if (v.b.position.x < 0) v.b.position.x += w;
+			if (v.b.position.y > h) v.b.position.y -= h; else if (v.b.position.y < 0) v.b.position.y += h;
 		}
 	}
 

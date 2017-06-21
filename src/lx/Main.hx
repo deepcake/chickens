@@ -62,6 +62,8 @@ class Main extends luxe.Game {
 
 
 	function start() {
+		Luxe.physics.destroy();
+
 		Builder.init();
 
 		states = new States( { name: "states" } );
