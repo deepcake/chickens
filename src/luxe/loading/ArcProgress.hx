@@ -1,4 +1,4 @@
-package lx.loading;
+package luxe.loading;
 
 import luxe.Color;
 import luxe.Ev;

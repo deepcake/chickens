@@ -1,4 +1,4 @@
-package lx.utils;
+package luxe.utils;
 import luxe.Color;
 import luxe.Vector;
 import luxe.tween.Actuate;

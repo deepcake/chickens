@@ -1,4 +1,4 @@
-package lx.components;
+package luxe.components;
 
 import spritesheet.SpriteSheetFrameData;
 

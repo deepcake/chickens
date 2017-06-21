@@ -7,7 +7,7 @@ import luxe.Ev;
 import luxe.Sprite;
 import luxe.Vector;
 import phoenix.Texture.FilterType;
-import lx.components.Animation;
+import luxe.components.Animation;
 #end
 import nape.callbacks.CbType;
 import nape.dynamics.InteractionFilter;
@@ -84,7 +84,7 @@ class LuxeBuilder {
 			size: size,
 			origin: new Vector(size.x * .5, size.y)
 		} );
-		s.add(new lx.components.Animation(seq, speed));
+		s.add(new luxe.components.Animation(seq, speed));
 		return s;
 	}
 
@@ -96,7 +96,7 @@ class LuxeBuilder {
 			size: size,
 			origin: new Vector(size.x * .5, size.y)
 		} );
-		s.add(new lx.components.Frame(f));
+		s.add(new luxe.components.Frame(f));
 		return s;
 	}
 }

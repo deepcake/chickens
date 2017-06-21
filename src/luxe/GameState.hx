@@ -1,4 +1,4 @@
-package lx;
+package luxe;
 
 import luxe.Color;
 import luxe.Input.Key;
@@ -52,7 +52,7 @@ class GameState extends State {
 
 	override function init() {
 		var size = 14 * Luxe.screen.device_pixel_ratio;
-		info_text = new lx.utils.LogText(true, false, size, new Color().rgb(Std.random(0xffffff)));
+		info_text = new luxe.utils.LogText(true, false, size, new Color().rgb(Std.random(0xffffff)));
 		info_text.text = '[R] to reload scene\n[Q/A][right/left tap] to add/remove chicken\n[D] to enable/disable debug nape draw';
 	}
 

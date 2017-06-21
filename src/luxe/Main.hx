@@ -1,6 +1,6 @@
-package lx;
+package luxe;
 
-import lx.loading.ArcProgress;
+import luxe.loading.ArcProgress;
 import luxe.Color;
 import luxe.GameConfig;
 import luxe.Parcel;
@@ -41,8 +41,8 @@ class Main extends luxe.Game {
 		var logbat = Luxe.renderer.create_batcher( { name: 'log' } );
 		var size = 14 * Luxe.screen.device_pixel_ratio;
 
-		mon_text = new lx.utils.LogText(true, true, size, new Color().rgb(Std.random(0xffffff)), logbat);
-		log_text = new lx.utils.LogText(false, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
+		mon_text = new luxe.utils.LogText(true, true, size, new Color().rgb(Std.random(0xffffff)), logbat);
+		log_text = new luxe.utils.LogText(false, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
 
 		Log.log('ready');
 
@@ -67,7 +67,7 @@ class Main extends luxe.Game {
 		Builder.init();
 
 		states = new States( { name: "states" } );
-		states.add(new lx.GameState());
+		states.add(new luxe.GameState());
 
 		states.set("game");
 	}
