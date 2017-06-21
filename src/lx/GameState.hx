@@ -1,4 +1,4 @@
-package luxe;
+package lx;
 
 import luxe.Color;
 import luxe.Input.Key;
@@ -47,7 +47,7 @@ class GameState extends State {
 
 	override function init() {
 		var size = 14 * Luxe.screen.device_pixel_ratio;
-		info_text = new luxe.utils.LogText(true, false, size, new Color().rgb(Std.random(0xffffff)));
+		info_text = new lx.utils.LogText(true, false, size, new Color().rgb(Std.random(0xffffff)));
 		info_text.text = '[R] to reload scene\n[Q/A][right/left tap] to add/remove chicken\n[D] to enable/disable debug nape draw';
 	}
 
@@ -106,14 +106,15 @@ class GameState extends State {
 				if (Builder.echo.hasSystem(NapeDebugDraw)) Builder.echo.removeSystem(Builder.echo.getSystem(NapeDebugDraw));
 				else Builder.echo.addSystem(new NapeDebugDraw());
 
-			case Key.escape: 
-				Luxe.shutdown();
+			//case Key.escape: 
+			//	Luxe.shutdown();
 
 			default:
 		}
 	}
 
 	override function update(dt:Float) {
+		Builder.echo.update(dt);
 		Log.track('echo', '${Builder.echo}');
 	}
 

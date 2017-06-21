@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="sprites.png">
+	<!--
+	Created with ShoeBox
+	http://renderhjs.net/shoebox/
+	-->
+	<SubTexture name="cat_fly0001.png"	x="129"	y="203"	width="128"	height="75" frameX="-0" frameY="-0" frameWidth="128" frameHeight="75"/>
+	<SubTexture name="cat_fly0002.png"	x="258"	y="228"	width="128"	height="75" frameX="-0" frameY="-0" frameWidth="128" frameHeight="75"/>
+	<SubTexture name="cat_fly0003.png"	x="258"	y="152"	width="128"	height="75" frameX="-0" frameY="-0" frameWidth="128" frameHeight="75"/>
+	<SubTexture name="cat_fly0004.png"	x="258"	y="76"	width="128"	height="75" frameX="-0" frameY="-0" frameWidth="128" frameHeight="75"/>
+	<SubTexture name="cat_fly0005.png"	x="258"	y="0"	width="128"	height="75" frameX="-0" frameY="-0" frameWidth="128" frameHeight="75"/>
+	<SubTexture name="cat_fly0006.png"	x="129"	y="431"	width="128"	height="75" frameX="-0" frameY="-0" frameWidth="128" frameHeight="75"/>
+	<SubTexture name="cat_fly0007.png"	x="129"	y="355"	width="128"	height="75" frameX="-0" frameY="-0" frameWidth="128" frameHeight="75"/>
+	<SubTexture name="cat_fly0008.png"	x="129"	y="279"	width="128"	height="75" frameX="-0" frameY="-0" frameWidth="128" frameHeight="75"/>
+	<SubTexture name="chicken_fly0001.png"	x="258"	y="304"	width="128"	height="100" frameX="-0" frameY="-0" frameWidth="128" frameHeight="101"/>
+	<SubTexture name="chicken_fly0002.png"	x="129"	y="102"	width="128"	height="100" frameX="-0" frameY="-0" frameWidth="128" frameHeight="101"/>
+	<SubTexture name="chicken_fly0003.png"	x="129"	y="0"	width="128"	height="101" frameX="-0" frameY="-0" frameWidth="128" frameHeight="101"/>
+	<SubTexture name="chicken_fly0004.png"	x="0"	y="400"	width="128"	height="100" frameX="-0" frameY="-0" frameWidth="128" frameHeight="101"/>
+	<SubTexture name="monster_fly0001.png"	x="0"	y="300"	width="128"	height="99" frameX="-0" frameY="-0" frameWidth="128" frameHeight="99"/>
+	<SubTexture name="monster_fly0002.png"	x="0"	y="200"	width="128"	height="99" frameX="-0" frameY="-0" frameWidth="128" frameHeight="99"/>
+	<SubTexture name="monster_fly0003.png"	x="0"	y="100"	width="128"	height="99" frameX="-0" frameY="-0" frameWidth="128" frameHeight="99"/>
+	<SubTexture name="monster_fly0004.png"	x="0"	y="0"	width="128"	height="99" frameX="-0" frameY="-0" frameWidth="128" frameHeight="99"/>
+</TextureAtlas>

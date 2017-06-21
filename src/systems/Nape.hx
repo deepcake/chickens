@@ -18,29 +18,26 @@ class Nape extends System {
 	var view:View<{ b:Body }>;
 
 
-	public function new(space:Space) {
-		this.space = space;
+	public function new(?space:Space) {
+		this.space = space == null ? new Space() : space;
 		space.gravity.setxy(.0, .0);
 		space.worldLinearDrag = 8;
 		space.worldAngularDrag = 32;
 	}
 
-	@a function add(id:Int) {
-		var b = echo.getComponent(id, Body);
+	@a inline function ad(id:Int, b:Body) {
 		b.userData.id = id;
 		space.bodies.add(b);
 	}
 
-	@r function rem(id:Int) {
-		var b = echo.getComponent(id, Body);
+	@r inline function rm(id:Int, b:Body) {
 		b.userData.id = null;
 		space.bodies.remove(b);
 	}
 
-	override public function update(dt:Float) {
-
+	@u public function step(dt:Float) {
+		#if !luxe space.step(dt); #end
 		Log.track('bodies', space.bodies.length);
-
 	}
 
 }

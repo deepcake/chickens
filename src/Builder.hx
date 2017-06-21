@@ -1,12 +1,14 @@
 package;
+import echo.Echo;
+import components.*;
+import spritesheet.SpriteSheet;
+#if luxe
 import luxe.Ev;
 import luxe.Sprite;
 import luxe.Vector;
 import phoenix.Texture.FilterType;
-import luxe.components.Animation;
-import spritesheet.SpriteSheet;
-import echo.Echo;
-import components.*;
+import lx.components.Animation;
+#end
 import nape.callbacks.CbType;
 import nape.dynamics.InteractionFilter;
 import nape.geom.Vec2;
@@ -25,42 +27,36 @@ using Log;
 class Builder {
 
 
-	static public var atlas:SpriteSheet;
-
 	static public var Chicken = new CbType();
 	static public var Monster = new CbType();
 
 
-	static public var echo = new Echo();
+	static public var echo:Echo;
 
-	static public var nape = new NapeBuilder();
-	static public var luxe = new LuxeBuilder();
+	static public var nape:NapeBuilder;
+	static public var visual:VisualBuilder;
 
 
 	static public function initialize() {
-		atlas = new SpriteSheet();
-		SpriteSheet.parseSparrowXmlString(Luxe.resources.text('assets/sprites.xml').asset.text, atlas);
+		nape = new NapeBuilder();
+		visual = new VisualBuilder();
 
-		Luxe.on(Ev.update, echo.update);
+		echo = new Echo();
 	}
 
 	static public function chicken(?x:Float, ?y:Float, ?vx:Float, ?vy:Float) {
-		var s = luxe.animation('chicken_fly', Std.int(25), .4);
+		var s = visual.anim('chicken_fly', Std.int(25), .4);
 		var v = new Vel(vx, vy);
-		var b = nape.body(x.alt(Math.random() * Luxe.screen.w), 
-						  y.alt(Math.random() * Luxe.screen.h),
-						  nape.cir(10));
+		var b = nape.body(x, y, nape.cir(10));
 		b.cbTypes.add(Chicken);
 		var status = new Status();
 		echo.setComponent(echo.id(), s, v, b, status);
 	}
 
 	static public function monster(?x:Float, ?y:Float, ?vx:Float, ?vy:Float) {
-		var s = luxe.animation('monster_fly', Std.int(25), 1.0);
+		var s = visual.anim('monster_fly', Std.int(25), 1.0);
 		var v = new Vel(vx, vy);
-		var b = nape.body(x.alt(Math.random() * Luxe.screen.w), 
-						  y.alt(Math.random() * Luxe.screen.h),
-						  nape.cir(20));
+		var b = nape.body(x, y, nape.cir(20));
 		b.cbTypes.add(Monster);
 		var status = new Status();
 		echo.setComponent(echo.id(), s, v, b, status);
@@ -68,31 +64,43 @@ class Builder {
 
 }
 
-class LuxeBuilder {
-	public function new() { }
+class VisualBuilder {
 
-	public function animation(name:String, speed:Int = 25, scale:Float = 1.0):Sprite {
-		var seq = Builder.atlas.series.get(name);
-		var size = new Vector(seq[0].sw * scale, seq[0].sh * scale);
-		var s = new Sprite( {
-			texture: Luxe.resources.texture('assets/sprites.png'),
-			size: size,
-			origin: new Vector(size.x * .5, size.y)
-		} );
-		s.add(new luxe.components.Animation(seq, speed));
-		return s;
+	#if luxe static public var atlas:SpriteSheet; #end
+
+	public function new() {
+		#if luxe
+			atlas = new SpriteSheet();
+			SpriteSheet.parseSparrowXmlString(Luxe.resources.text('assets/sprites.atlas').asset.text, atlas);
+		#end
 	}
 
-	public function frame(name:String, scale:Float = 1.0):Sprite {
-		var f = Builder.atlas.frames.get(name);
-		var size = new Vector(f.sw * scale, f.sh * scale);
-		var s = new Sprite( {
-			texture: Luxe.resources.texture('assets/sprites.png'),
-			size: size,
-			origin: new Vector(size.x * .5, size.y)
-		} );
-		s.add(new luxe.components.Frame(f));
-		return s;
+	public function anim(name:String, speed:Int = 25, scale:Float = 1.0) {
+		#if luxe
+			var seq = atlas.series.get(name);
+			var size = new Vector(seq[0].sw * scale, seq[0].sh * scale);
+			var s = new Sprite( {
+				texture: Luxe.resources.texture('assets/sprites.png'),
+				size: size,
+				origin: new Vector(size.x * .5, size.y)
+			} );
+			s.add(new lx.components.Animation(seq, speed));
+			return s;
+		#end
+	}
+
+	public function sprite(name:String, scale:Float = 1.0) {
+		#if luxe
+			var f = atlas.frames.get(name);
+			var size = new Vector(f.sw * scale, f.sh * scale);
+			var s = new Sprite( {
+				texture: Luxe.resources.texture('assets/sprites.png'),
+				size: size,
+				origin: new Vector(size.x * .5, size.y)
+			} );
+			s.add(new lx.components.Frame(f));
+			return s;
+		#end
 	}
 }
 

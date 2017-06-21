@@ -31,8 +31,8 @@ class NapeDebugDraw extends System {
 			for (sh in v.b.shapes) {
 				#if luxe
 					var color = (echo.hasComponent(v.id, Status) && echo.getComponent(v.id, Status).interactingBodies.length > 0) ? new luxe.Color().rgb(0xf00000) : new luxe.Color().rgb(0xf0f0f0);
-					if (sh.isCircle()) luxe.utils.NapeDrawer.cir(sh.castCircle, color, (solidNonsensors ? !sh.sensorEnabled : false), batcher, true, false);
-					else luxe.utils.NapeDrawer.pol(sh.castPolygon, color, (solidNonsensors ? !sh.sensorEnabled : false), batcher, true, false);
+					if (sh.isCircle()) lx.utils.NapeDrawer.cir(sh.castCircle, color, (solidNonsensors ? !sh.sensorEnabled : false), batcher, true, false);
+					else lx.utils.NapeDrawer.pol(sh.castPolygon, color, (solidNonsensors ? !sh.sensorEnabled : false), batcher, true, false);
 				#end
 			}
 		}

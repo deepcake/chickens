@@ -2,7 +2,6 @@ package systems;
 
 import echo.View;
 import echo.System;
-import luxe.Sprite;
 import nape.phys.Body;
 
 /**
@@ -12,25 +11,23 @@ import nape.phys.Body;
 class Render extends System {
 
 
-	var view:View<{ b:Body, s:Sprite }>;
-
-
-	@r function remove_sprite(id:Int) {
-		echo.getComponent(id, Sprite).destroy();
+	#if luxe
+	@r inline function remove_sprite(s:luxe.Sprite) {
+		s.destroy();
 	}
 
-	override public function update(dt:Float) {
-		for (v in view) {
+	@u function render(b:Body, s:luxe.Sprite) {
+		if (s.flipx && b.velocity.x > 0) s.flipx = false;
+		if (!s.flipx && b.velocity.x < 0) s.flipx = true;
 
-			if (v.s.flipx && v.b.velocity.x > 0) v.s.flipx = false;
-			else if (!v.s.flipx && v.b.velocity.x < 0) v.s.flipx = true;
+		s.pos.x = b.position.x;
+		s.pos.y = b.position.y;
 
-			v.s.pos.x = v.b.position.x;
-			v.s.pos.y = v.b.position.y;
-
-			if (Std.int(v.b.position.y) != Std.int(v.s.depth)) v.s.depth = v.b.position.y;
-
-		}
+		if (Std.int(b.position.y) != Std.int(s.depth)) s.depth = b.position.y;
 	}
+	#end
+
+	
+
 
 }

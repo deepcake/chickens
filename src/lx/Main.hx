@@ -1,6 +1,6 @@
-package;
+package lx;
 
-import luxe.loading.ArcProgress;
+import lx.loading.ArcProgress;
 import luxe.Color;
 import luxe.GameConfig;
 import luxe.Parcel;
@@ -11,7 +11,7 @@ import luxe.Text;
 
 using Log;
 
-class MainLuxe extends luxe.Game {
+class Main extends luxe.Game {
 
 
 	static public var states:States;
@@ -41,8 +41,8 @@ class MainLuxe extends luxe.Game {
 		var logbat = Luxe.renderer.create_batcher( { name: 'log' } );
 		var size = 14 * Luxe.screen.device_pixel_ratio;
 
-		mon_text = new luxe.utils.LogText(true, true, size, new Color().rgb(Std.random(0xffffff)), logbat);
-		log_text = new luxe.utils.LogText(false, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
+		mon_text = new lx.utils.LogText(true, true, size, new Color().rgb(Std.random(0xffffff)), logbat);
+		log_text = new lx.utils.LogText(false, false, size, new Color().rgb(Std.random(0xffffff)), logbat);
 
 		Log.log('ready');
 
@@ -53,7 +53,7 @@ class MainLuxe extends luxe.Game {
 				{ id: 'assets/sprites.png' },
 			],
 			texts: [
-				{ id: 'assets/sprites.xml' },
+				{ id: 'assets/sprites.atlas' },
 			]
 		} );
 
@@ -65,7 +65,7 @@ class MainLuxe extends luxe.Game {
 		Builder.initialize();
 
 		states = new States( { name: "states" } );
-		states.add(new luxe.GameState());
+		states.add(new lx.GameState());
 
 		states.set("game");
 	}
