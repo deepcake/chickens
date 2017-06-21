@@ -37,7 +37,7 @@ class Builder {
 	static public var visual:VisualBuilder;
 
 
-	static public function initialize() {
+	static public function init() {
 		nape = new NapeBuilder();
 		visual = new VisualBuilder();
 
@@ -64,45 +64,43 @@ class Builder {
 
 }
 
-class VisualBuilder {
+typedef VisualBuilder = #if luxe LuxeBuilder; #end
 
-	#if luxe static public var atlas:SpriteSheet; #end
+#if luxe
+class LuxeBuilder {
+
+	static public var atlas:SpriteSheet;
 
 	public function new() {
-		#if luxe
-			atlas = new SpriteSheet();
-			SpriteSheet.parseSparrowXmlString(Luxe.resources.text('assets/sprites.atlas').asset.text, atlas);
-		#end
+		atlas = new SpriteSheet();
+		SpriteSheet.parseSparrowXmlString(Luxe.resources.text('assets/sprites.atlas').asset.text, atlas);
 	}
 
 	public function anim(name:String, speed:Int = 25, scale:Float = 1.0) {
-		#if luxe
-			var seq = atlas.series.get(name);
-			var size = new Vector(seq[0].sw * scale, seq[0].sh * scale);
-			var s = new Sprite( {
-				texture: Luxe.resources.texture('assets/sprites.png'),
-				size: size,
-				origin: new Vector(size.x * .5, size.y)
-			} );
-			s.add(new lx.components.Animation(seq, speed));
-			return s;
-		#end
+		var seq = atlas.series.get(name);
+		var size = new Vector(seq[0].sw * scale, seq[0].sh * scale);
+		var s = new Sprite( {
+			texture: Luxe.resources.texture('assets/sprites.png'),
+			size: size,
+			origin: new Vector(size.x * .5, size.y)
+		} );
+		s.add(new lx.components.Animation(seq, speed));
+		return s;
 	}
 
 	public function sprite(name:String, scale:Float = 1.0) {
-		#if luxe
-			var f = atlas.frames.get(name);
-			var size = new Vector(f.sw * scale, f.sh * scale);
-			var s = new Sprite( {
-				texture: Luxe.resources.texture('assets/sprites.png'),
-				size: size,
-				origin: new Vector(size.x * .5, size.y)
-			} );
-			s.add(new lx.components.Frame(f));
-			return s;
-		#end
+		var f = atlas.frames.get(name);
+		var size = new Vector(f.sw * scale, f.sh * scale);
+		var s = new Sprite( {
+			texture: Luxe.resources.texture('assets/sprites.png'),
+			size: size,
+			origin: new Vector(size.x * .5, size.y)
+		} );
+		s.add(new lx.components.Frame(f));
+		return s;
 	}
 }
+#end
 
 class NapeBuilder {
 	public function new() { }

@@ -62,7 +62,7 @@ class Main extends luxe.Game {
 
 
 	function start() {
-		Builder.initialize();
+		Builder.init();
 
 		states = new States( { name: "states" } );
 		states.add(new lx.GameState());
